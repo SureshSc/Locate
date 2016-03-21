@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.sivaguru.locate.Adapter.LocationAdapter;
+import com.sivaguru.locate.Helper.GooglePlayServicesHelper;
 import com.sivaguru.locate.Helper.LocationClass;
 
 import java.util.ArrayList;
@@ -41,8 +42,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent mapIntent = new Intent(MainActivity.this,MapsActivity.class);
-                startActivity(mapIntent);
+                GooglePlayServicesHelper googlePlayServicesHelper = new GooglePlayServicesHelper(MainActivity.this);
+                boolean isAvailable = googlePlayServicesHelper.checkPlayServices();
+
+                if (isAvailable){
+                    Intent mapIntent = new Intent(MainActivity.this,MapsActivity.class);
+                    startActivity(mapIntent);
+                } else {
+
+                }
+
             }
         });
     }
